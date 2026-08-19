@@ -1,0 +1,3 @@
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:4000/api';
+export async function getProducts(params = {}) { const query = new URLSearchParams(params); const response = await fetch(`${API_URL}/products?${query}`); if (!response.ok) throw new Error('Could not load the menu.'); return response.json(); }
+export async function placeOrder(payload) { const response = await fetch(`${API_URL}/orders`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }); const data = await response.json(); if (!response.ok) throw new Error(data.error || 'Could not place order.'); return data; }
